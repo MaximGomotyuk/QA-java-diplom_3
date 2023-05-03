@@ -14,20 +14,15 @@ abstract public class BaseTest {
     protected static final User user = Generator.getRandomUser();
 
     UserClient userClient;
-
-    private void setUp() {
-        WebDriverManager.chromedriver().setup();
-        Configuration.browser = "chrome";
-        
-        Configuration.driverManagerEnabled = true;
-        Configuration.browserSize = "1920x1080";
-        Configuration.headless = false;
-    }
-
+   /*
+   private void setUp() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\max\\Documents\\YandexDriver\\yandexdriver.exe");
+        System.setProperty("selenide.browser", "Chrome");
+       }
+   */
     @Before
     public void init() {
-        setUp();
-
+        //setUp();
         userClient = new UserClient();
         userClient.createUser(user);
     }
@@ -36,6 +31,7 @@ abstract public class BaseTest {
     public void tearDown() {
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
+        Selenide.closeWebDriver();  // Я добавил, но Selenide автоматически закрывает браузер после тестов
 
         UserCredentials userCredentials = new UserCredentials(user.getEmail(), user.getPassword());
         Response response = userClient.login(userCredentials);

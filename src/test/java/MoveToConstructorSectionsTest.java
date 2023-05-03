@@ -3,59 +3,62 @@ import org.junit.Test;
 import pageobject.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.junit.Assert.assertTrue;
 
 public class MoveToConstructorSectionsTest extends BaseTest {
 
     @Test
     @DisplayName("Перейти в Булочки в конструкторе по кнопке")
     public void moveBunsSectionButtonTest() {
-        open(MainPage.URL_MAIN, MainPage.class)
-                .clickSaucesButton()
+            assertTrue(open(MainPage.URL_MAIN, MainPage.class)
+                .clickFillingsButton()
                 .clickBunsButton()
-                .isBunsHeaderIsDisplayed();
+                .isBunsHeaderIsDisplayed());
     }
 
     @Test
     @DisplayName("Перейти в Соусы в конструкторе по кнопке")
     public void moveSaucesSectionButtonTest() {
-        open(MainPage.URL_MAIN, MainPage.class)
+        assertTrue(open(MainPage.URL_MAIN, MainPage.class)
+                .clickFillingsButton()
                 .clickSaucesButton()
-                .isSaucesHeaderDisplayed();
+                .isSaucesHeaderDisplayed());
     }
 
     @Test
     @DisplayName("Перейти в Начинки в конструкторе по кнопке")
     public void moveFillingsSectionButtonTest() {
 
-        open(MainPage.URL_MAIN, MainPage.class)
-                .clickFillingsButton()
-                .isSaucesHeaderDisplayed();
+       assertTrue(open(MainPage.URL_MAIN, MainPage.class)
+               .clickFillingsButton()
+                .isFillingsHeaderDisplayed());
     }
 
     @Test
-    @DisplayName("Скролл к Булочкам в конструторе")
+    @DisplayName("Скролл к Булочкам в конструкторе")
     public void moveBunsSectionScrollTest() {
-        open(MainPage.URL_MAIN, MainPage.class)
-                .scrollToBunsHeader()
-                .isBunsHeaderIsDisplayed();
-    }
-
-
-    @Test
-    @DisplayName("Скролл к Соусам в конструторе")
-    public void moveSaucesSectionScrollTest() {
-        open(MainPage.URL_MAIN, MainPage.class)
+        assertTrue(open(MainPage.URL_MAIN, MainPage.class)
                 .scrollToSaucesHeader()
-                .isSaucesHeaderDisplayed();
+                .scrollToBunsHeader()
+                .isBunsHeaderIsDisplayed());
     }
 
 
     @Test
-    @DisplayName("Скролл к Начинкам в конструторе")
-    public void moveFillingsSectionScrollest() {
-        open(MainPage.URL_MAIN, MainPage.class)
+    @DisplayName("Скролл к Соусам в конструкторе")
+    public void moveSaucesSectionScrollTest() {
+        assertTrue(open(MainPage.URL_MAIN, MainPage.class)
+                .scrollToSaucesHeader()
+                .isSaucesHeaderDisplayed());
+    }
+
+
+    @Test
+    @DisplayName("Скролл к Начинкам в конструкторе")
+    public void moveFillingsSectionScrollTest() {
+        assertTrue(open(MainPage.URL_MAIN, MainPage.class)
                 .scrollToFillingsHeader()
-                .isFillingsHeaderDisplayed();
+                .isFillingsHeaderDisplayed());
     }
 
 }

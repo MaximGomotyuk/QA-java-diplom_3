@@ -11,19 +11,18 @@ import pageobject.MainPage;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.*;
 
-
-public class RegistrationTest {
+public class RegistrationTest extends BaseTest {
     UserClient userClient;
 
     protected String name = Generator.getRandomUser().getName();
     protected String email = Generator.getRandomUser().getEmail();
     protected String password = Generator.getRandomUser().getPassword();
     protected String incorrectPassword = "1234";
-    
+
     private static final String CURRENT_URL = "https://stellarburgers.nomoreparties.site/login";
 
     @Test
-    @DisplayName("Создание нового пользователя с ваидными данными")
+    @DisplayName("Создание нового пользователя с валидными данными")
     public void userRegisterValidDataTest() {
         open(MainPage.URL_MAIN, MainPage.class)
                 .clickLoginButton()
@@ -34,8 +33,8 @@ public class RegistrationTest {
                 .clickConfirmRegistrationButton()
                 .loginRegisterUser(email, password);
 
-
         String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
+        assertEquals(CURRENT_URL, currentUrl);
     }
 
     @Test
@@ -56,7 +55,7 @@ public class RegistrationTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         userClient = new UserClient();
         UserCredentials userCredentials = new UserCredentials(email, password);
         Response response = userClient.login(userCredentials);

@@ -23,6 +23,10 @@ public class MainPage {
     @FindBy(how = How.XPATH, using = "//p[text()='Личный Кабинет']")
     private SelenideElement personalProfileButton;
 
+    //Пункт меню
+    @FindBy(how = How.CLASS_NAME, using = "tab_tab_type_current__2BEPc")
+    private SelenideElement activeElement;
+
     //Заголовок Соберите бургер
     @FindBy(how = How.XPATH, using = "//h1[text()='Соберите бургер']")
     private SelenideElement burgerConstructionHeader;
@@ -108,37 +112,37 @@ public class MainPage {
 
     @Step("Проверить что заголовок Булки появился")
     public boolean isBunsHeaderIsDisplayed() {
-        return sectionIngredients.getText().contentEquals("Булки");
+        return activeElement.getText().contentEquals("Булки");
     }
 
     @Step("Проверить что заголовок Соусы появился")
     public boolean isSaucesHeaderDisplayed() {
-        return sectionIngredients.getText().contentEquals("Соусы");
+        return activeElement.getText().contentEquals("Соусы");
     }
 
     @Step("Проверить что заголовок Начинки появился")
     public boolean isFillingsHeaderDisplayed() {
-        return sectionIngredients.getText().contentEquals("Начинки");
+        return activeElement.getText().contentEquals("Начинки");
     }
 
     @Step("Скролл до Булочек")
     public MainPage scrollToBunsHeader() {
         constructorContainer.click();
-        buttonBunsHeader.scrollIntoView(false);
+        buttonBunsHeader.scrollIntoView(true);
         return this;
     }
 
     @Step("Скролл до Соусов")
     public MainPage scrollToSaucesHeader() {
         constructorContainer.click();
-        buttonSauceHeader.scrollIntoView(false);
+        buttonSauceHeader.scrollIntoView(true);
         return this;
     }
 
     @Step("Скролл до Начинок")
     public MainPage scrollToFillingsHeader() {
         constructorContainer.click();
-        buttonFillingsHeader.scrollIntoView(false);
+        buttonFillingsHeader.scrollIntoView(true);
         return this;
     }
 
