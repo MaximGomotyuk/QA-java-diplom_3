@@ -14,15 +14,17 @@ abstract public class BaseTest {
     protected static final User user = Generator.getRandomUser();
 
     UserClient userClient;
-   /*
-   private void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\max\\Documents\\YandexDriver\\yandexdriver.exe");
-        System.setProperty("selenide.browser", "Chrome");
-       }
-   */
+    private void setUp() { // Для запуска в Яндекс Браузере использовать команду mvn test -Dbrowser=y, в Сhrome - mvn test -Dbrowser=c
+        String value = System.getProperty("browser");
+        if (value.equals("y")) {
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\max\\Documents\\YandexDriver\\yandexdriver.exe");
+        } else {
+            System.setProperty("selenide.browser", "Chrome");
+        }
+    }
     @Before
     public void init() {
-        //setUp();
+        setUp();
         userClient = new UserClient();
         userClient.createUser(user);
     }
